@@ -3,9 +3,12 @@
 	"version": "0.1.0",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ."
+		"build": "tsc",
+		"start": "electron ./dist/main.js",
+		"all": "yarn build && yarn start"
 	},
 	"devDependencies": {
-		"electron": "^4.0.1"
+		"electron": "^4.0.1",
+		"typescript": "^3.2.2"
 	}
 }
