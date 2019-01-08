@@ -3,7 +3,8 @@
 	"version": "0.1.0",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ./dist/electron-app.js"
+		"start": "electron ./dist/main.bundle.js",
+		"dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors"
 	},
 	"devDependencies": {
 		"electron": "^4.0.1",
@@ -12,8 +13,14 @@
 		"webpack-cli": "^3.2.1"
 	},
 	"dependencies": {
+		"css-loader": "^2.1.0",
+		"html-webpack-plugin": "^3.2.0",
+		"node-sass": "^4.11.0",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
+		"rimraf": "^2.6.3",
+		"sass-loader": "^7.1.0",
+		"style-loader": "^0.23.1",
 		"webpack": "^4.28.3"
 	}
 }
