@@ -6,7 +6,8 @@ import './style.scss';
 
 ReactDOM.render(
     <div>
-        <h4>Rendered ReactJS / Typescript in Electron</h4>
+        <h4>GPX Viewer</h4>
+		<p>Drag a gpx file in to see it rendered on a map.</p>
     </div>,
     document.getElementById('app')
 );

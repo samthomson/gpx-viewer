@@ -47,7 +47,7 @@ let mainConfig = {
 
 let rendererConfig = {
     mode: 'development',
-    entry: './src/renderer/renderer.tsx',
+    entry: './src/renderer/GPXApp.tsx',
     target: 'electron-renderer',
     output: {
         filename: 'renderer.bundle.js',
