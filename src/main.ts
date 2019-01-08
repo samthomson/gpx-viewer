@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron'
+import * as path from 'path'
 
 let win = null
 
@@ -8,7 +9,8 @@ function createWindow () {
     win.webContents.openDevTools()
 
 	// and load the index.html of the app.
-	win.loadFile('./../html/index.html')
+	const sIndex = path.resolve('./html/index.html')
+	win.loadFile(sIndex)
 }
 
 app.on('ready', createWindow)
