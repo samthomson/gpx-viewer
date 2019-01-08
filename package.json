@@ -3,12 +3,17 @@
 	"version": "0.1.0",
 	"main": "main.js",
 	"scripts": {
-		"build": "tsc",
-		"start": "electron ./dist/main.js",
-		"all": "yarn build && yarn start"
+		"start": "electron ./dist/electron-app.js"
 	},
 	"devDependencies": {
 		"electron": "^4.0.1",
-		"typescript": "^3.2.2"
+		"ts-loader": "^5.3.3",
+		"typescript": "^3.2.2",
+		"webpack-cli": "^3.2.1"
+	},
+	"dependencies": {
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0",
+		"webpack": "^4.28.3"
 	}
 }
