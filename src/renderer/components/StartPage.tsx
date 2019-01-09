@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Store } from '../redux/store'
 import { goToMapPage } from '../redux/actions'
-import PropTypes, { string } from 'prop-types';
+import PropTypes, { string } from 'prop-types'
+import { remote } from 'electron'
 
 interface IMyComponentProps {
 	goToMapPage: any,
@@ -20,15 +21,19 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
 	
-	mapClick () {
-		this.props.goToMapPage('testestset.file')
+	selectFile () {
+		remote.dialog.showOpenDialog({ 
+			properties: [ 'openFile' ] }, filename => {
+				this.props.goToMapPage(filename[0])
+			}
+		)
 	}
     render() {
        return (
         <div>
             <h1>Start page</h1>
             <p>Load a file ({this.props.filePath}) to begin..</p>
-			<button onClick={this.mapClick.bind(this)}>map</button>
+			<button onClick={this.selectFile.bind(this)}>select a GPX file..</button>
         </div> 
        )
     }
