@@ -7,6 +7,7 @@ import { Store } from '../redux/store'
 import { goToMapPage } from '../redux/actions'
 import PropTypes, { string } from 'prop-types'
 import { remote } from 'electron'
+import fs from 'fs'
 
 interface IMyComponentProps {
 	goToMapPage: any,
@@ -21,10 +22,19 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
 	
-	selectFile () {
+	selectFile = () => {
 		remote.dialog.showOpenDialog({ 
-			properties: [ 'openFile' ] }, filename => {
-				this.props.goToMapPage(filename[0])
+			filters: [
+				{ name: 'GPX files', extensions: ['gpx'] },
+			],
+			properties: [ 'openFile' ] }, async (filename: string[]) => {
+
+				var sFileData = fs.readFileSync(filename[0], 'utf8');
+
+				console.log('file data')
+				console.log(sFileData)
+
+				this.props.goToMapPage(sFileData)
 			}
 		)
 	}
