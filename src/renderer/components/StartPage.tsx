@@ -4,13 +4,12 @@ import * as actions from '../redux/actions'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Store } from '../redux/store'
-import { goToMapPage } from '../redux/actions'
+import { loadFile } from '../redux/actions'
 import PropTypes, { string } from 'prop-types'
 import { remote } from 'electron'
-import fs from 'fs'
 
 interface IMyComponentProps {
-	goToMapPage: any,
+	loadFile: any,
 	filePath: string
 }
 
@@ -27,16 +26,10 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 			filters: [
 				{ name: 'GPX files', extensions: ['gpx'] },
 			],
-			properties: [ 'openFile' ] }, async (filename: string[]) => {
-
-				var sFileData = fs.readFileSync(filename[0], 'utf8');
-
-				console.log('file data')
-				console.log(sFileData)
-
-				this.props.goToMapPage(sFileData)
+			properties: [ 'openFile' ] }, (filename: string[]) => {
+				this.props.loadFile(filename[0])
 			}
-		)
+		)	
 	}
     render() {
        return (
@@ -55,7 +48,7 @@ const mapStateToProps = (state: Store.App) => ({
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-	goToMapPage: (filePath: string) => dispatch(goToMapPage(filePath))
+	loadFile: (filePath: string) => dispatch(loadFile(filePath))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartPage)

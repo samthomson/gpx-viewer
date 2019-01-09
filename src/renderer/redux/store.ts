@@ -3,7 +3,7 @@ export namespace Store {
 
 	export type App = {
 		haveAFile: boolean
-		filePath: string
+		fileData: string
 	}
   
 	export type All = {

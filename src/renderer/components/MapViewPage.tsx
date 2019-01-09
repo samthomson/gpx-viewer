@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Store } from '../redux/store'
 
 interface IMyComponentProps {
-	filePath: string
+	fileData: string
 }
 
 export class MapViewPage extends React.Component<IMyComponentProps, {}> {
@@ -15,7 +15,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
        return (
         <div>
             <h1>Map view page</h1> 
-            <p>[map view: render this gpx file - {this.props.filePath}]</p>
+            <p>[map view: render this gpx file - {this.props.fileData}]</p>
             <p>[elevation profile]</p>
             <p>[trackpoint log]</p>
 			<Link to="/">home</Link>
@@ -26,7 +26,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		filePath: state.filePath
+		fileData: state.fileData
 	};
 };
 

@@ -1,22 +1,26 @@
 import {  Dispatch } from 'redux';
+import fs from 'fs'
 import { history } from '../GPXApp';
 
 const MAP_PAGE: string = 'MAP_PAGE'
 const START_PAGE: string = 'START_PAGE'
 
 export type Action = {
-	type: 'MAP_PAGE',
-	filePath: string,
+	type: 'LOAD_FILE',
+	fileData: string,
   } | {
 	type: 'START_PAGE',
   }
   
-export const goToMapPage = (filePath: string): Action => {
+export const loadFile = (filePath: string): Action => {
+	// load data
+ 	const sFileData = fs.readFileSync(filePath, 'utf8');
+
 	// change page
 	history.push('/mapview');
 	return {
-		type: 'MAP_PAGE',
-		filePath,
+		type: 'LOAD_FILE',
+		fileData: sFileData,
 	}
 }
   

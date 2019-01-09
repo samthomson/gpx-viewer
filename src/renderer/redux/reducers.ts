@@ -3,22 +3,22 @@ import { Store } from './store'
 
 const initialState: Store.App = {
 	haveAFile: false,
-	filePath: 'fdsfds'
+	fileData: 'fdsfds'
 }
 
 export function appReducers (state: Store.App = initialState, action: Action): Store.App {
-	const { filePath } = state
+	const { fileData } = state
 
 	switch (action.type) {
-		case 'MAP_PAGE':
+		case 'LOAD_FILE':
 			return {
 				haveAFile: true,
-				filePath: action.filePath
+				fileData: action.fileData
 			}
 		case 'START_PAGE':
 			return {
 				haveAFile: false,
-				filePath: ''
+				fileData: fileData
 			}
 	}
 
