@@ -1,19 +1,21 @@
 import * as React from 'react'
-// import * as Redux from 'react-redux'
-// import * as actions from 'actions'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Store } from '../redux/store'
 
-export class MapViewPage extends React.Component {
-    
-    constructor () {
-        super()
-    }
+interface IMyComponentProps {
+	filePath: string
+}
 
+export class MapViewPage extends React.Component<IMyComponentProps, {}> {
+    constructor(props: IMyComponentProps) {
+		super(props);
+	}
     render() {
        return (
         <div>
-            <h1>Map view page</h1>
-            <p>[map view]</p>
+            <h1>Map view page</h1> 
+            <p>[map view: render this gpx file - {this.props.filePath}]</p>
             <p>[elevation profile]</p>
             <p>[trackpoint log]</p>
 			<Link to="/">home</Link>
@@ -22,5 +24,13 @@ export class MapViewPage extends React.Component {
     }
 }
 
-// export default Redux.connect()(MapViewPage)
-export default MapViewPage
+const mapStateToProps = (state: Store.App) => {
+	return {
+		filePath: state.filePath
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	null
+)(MapViewPage)
