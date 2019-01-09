@@ -1,4 +1,4 @@
-# GPX view
+# GPX viewer
 
 This is a simple app for viewing GPX files. It aims to visualise a file on a map, and with an elevation profile too.
 
