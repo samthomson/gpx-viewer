@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -24,7 +24,20 @@ function createWindow() {
 	mainWindow.webContents.openDevTools();
 	
 	// configure menu
-	mainWindow.setMenu(null);
+	const template = [
+		{
+			label: 'File',
+			submenu: [
+				{
+					label: 'load..',
+					click () { console.log('open a file dialog?') }
+				}
+			]
+		}
+	]
+
+	const menu = Menu.buildFromTemplate(template)
+	Menu.setApplicationMenu(menu)
 
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
