@@ -5,6 +5,18 @@
 	"license": "MIT",
 	"author": "Sam Thomson <samt@samt.st> (https://samt.st)",
 	"repository": "github:samthomson/gpx-viewer",
+	"keywords": [
+		"GPX",
+		"JS",
+		"Typescript",
+		"Electron",
+		"React",
+		"Redux",
+		"Webpack",
+		"Map",
+		"data visualisation"
+	],
+	"description": "Desktop GPX file viewer - render GPX file on map with elevation profile",
 	"scripts": {
 		"start": "electron ./dist/main.bundle.js",
 		"dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
