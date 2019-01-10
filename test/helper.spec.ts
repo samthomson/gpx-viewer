@@ -1,14 +1,24 @@
-// DEFINE MOCKS
-
 import { expect } from 'chai'
-// import {
-//     parseGPXData,
-// } from '../src/renderer/lib'
-// import { GPXData, GPXPoint } from '../src/declarations'
+import * as fs from 'fs'
+import {
+    parseGPXData,
+} from '../src/renderer/lib/helper'
+import { GPXData, GPXPoint } from '../src/declarations'
 
 describe('helper', () => {
     it('should parse GPX data', () => {
-        expect(10).to.equal(10)
-        expect(10).to.equal(11)
+		// read test file data (file specified relative to root, where test is executed)
+		const sFileData = fs.readFileSync('Kuwait.gpx', 'utf8');
+
+		const oParsedData: GPXData = parseGPXData(sFileData)
+
+		// test against parse function
+		expect(oParsedData.name).to.equal('Kuwait')
+		
+
+		expect(oParsedData.points).to.exist
+		expect(oParsedData.points.length).to.equal(237)
+		
+        expect(oParsedData.points[0].latitude).to.equal(29.241724)
     })
 })
