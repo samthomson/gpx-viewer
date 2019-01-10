@@ -1,9 +1,10 @@
+import { GPXData } from "../../declarations";
 
 export namespace Store {
 
 	export type App = {
 		haveAFile: boolean
-		fileData: string
+		fileData: GPXData
 	}
   
 	export type All = {

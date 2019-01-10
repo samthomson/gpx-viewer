@@ -7,10 +7,11 @@ import { Store } from '../redux/store'
 import { loadFile } from '../redux/actions'
 import PropTypes, { string } from 'prop-types'
 import { remote } from 'electron'
+import { GPXData } from '../../declarations';
 
 interface IMyComponentProps {
 	loadFile: any,
-	filePath: string
+	fileData: GPXData
 }
 
 interface IMyComponentState {
@@ -35,7 +36,7 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
        return (
         <div>
             <h1>Start page</h1>
-            <p>Load a file ({this.props.filePath}) to begin..</p>
+            <p>open a GPX file to begin..</p>
 			<button onClick={this.selectFile.bind(this)}>select a GPX file..</button>
         </div> 
        )
@@ -44,7 +45,7 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 
 
 const mapStateToProps = (state: Store.App) => ({
-	filePath: state.filePath
+	fileData: state.fileData
 })
 
 const mapDispatchToProps = (dispatch: any) => ({

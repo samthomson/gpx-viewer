@@ -8,7 +8,7 @@ import MapViewPage from './components/MapViewPage';
 
 import { createStore, Store as ReduxStore } from 'redux'
 import { appReducers } from './redux/reducers'
-import { goToStartPage, goToMapPage } from './redux/actions'
+import { goToStartPage, loadFile } from './redux/actions'
 import { Store } from './redux/store'
 
 const store: ReduxStore<Store.All> = createStore(appReducers)
@@ -24,6 +24,7 @@ store.subscribe(() => {
 })
 
 store.dispatch(goToStartPage()) 
+store.dispatch(loadFile('./Kuwait.gpx')) 
 
 ReactDOM.render(
     <div>

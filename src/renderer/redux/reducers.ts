@@ -3,7 +3,7 @@ import { Store } from './store'
 
 const initialState: Store.App = {
 	haveAFile: false,
-	fileData: 'fdsfds'
+	fileData: null
 }
 
 export function appReducers (state: Store.App = initialState, action: Action): Store.App {
