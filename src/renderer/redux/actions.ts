@@ -1,11 +1,8 @@
-import {  Dispatch } from 'redux';
 import * as fs from 'fs'
 import { history } from '../GPXApp';
 import { GPXData } from '../../declarations';
 import { parseGPXData } from '../lib/helper';
 
-const MAP_PAGE: string = 'MAP_PAGE'
-const START_PAGE: string = 'START_PAGE'
 
 export type Action = {
 	type: 'LOAD_FILE',

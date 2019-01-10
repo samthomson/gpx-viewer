@@ -1,11 +1,7 @@
 import * as React from 'react'
-import * as Redux from 'react-redux'
-import * as actions from '../redux/actions'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Store } from '../redux/store'
 import { loadFile } from '../redux/actions'
-import PropTypes, { string } from 'prop-types'
 import { remote } from 'electron'
 import { GPXData } from '../../declarations';
 
