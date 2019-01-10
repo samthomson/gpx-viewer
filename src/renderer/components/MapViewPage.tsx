@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Store } from '../redux/store'
 import { GPXData } from '../../declarations';
 
+// @ts-ignore
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 interface IMyComponentProps {
 	fileData: GPXData
 }
@@ -13,14 +15,37 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
     render() {
+		const position = [0, 0]
+
+
        return (
-        <div>
-            <h1>Map view page</h1> 
-            <p>[map view: render this gpx file - {this.props.fileData.points.length} points of data]</p>
-            <p>[elevation profile]</p>
-            <p>[trackpoint log]</p>
-			<Link to="/">home</Link>
-        </div> 
+			<div>
+				<h1>Map view page</h1> 
+
+				<div style={{
+					paddingBottom: "5%",
+					height: "400px",
+					width: "800px"
+				}}>
+					<Map style={{
+                paddingBottom: "5%",
+                height: "400px",
+				width: "800px"}}
+				center={position} zoom={6} id="map">
+						<TileLayer
+						attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						/>
+						<Marker position={position}>
+						</Marker>
+					</Map>
+				</div>
+
+				<p>[map view: render this gpx file - {this.props.fileData.points.length} points of data]</p>
+				<p>[elevation profile]</p>
+				<p>[trackpoint log]</p>
+				<Link to="/">home</Link>
+			</div> 
        )
     }
 }

@@ -27,13 +27,13 @@ let mainConfig = {
                     loader: 'ts-loader',
                 },
             },
-            // {
-            //     test: /\.(jpg|png|svg|ico|icns)$/,
-            //     loader: 'file-loader',
-            //     options: {
-            //         name: '[path][name].[ext]',
-            //     },
-            // },
+            {
+                test: /\.(jpg|png|svg|ico|icns)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
+            },
             // {
             //     test: /\.(eot|ttf|woff|woff2)$/,
             //     loader: 'file-loader',
@@ -78,13 +78,13 @@ let rendererConfig = {
                     'sass-loader?sourceMap',
                 ],
             },
-            // {
-            //     test: /\.(jpg|png|svg|ico|icns)$/,
-            //     loader: 'file-loader',
-            //     options: {
-            //         name: '[path][name].[ext]',
-            //     },
-            // },
+            {
+                test: /\.(jpg|png|svg|ico|icns)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
+            },
             // {
             //     test: /\.(eot|ttf|woff|woff2)$/,
             //     loader: 'file-loader',

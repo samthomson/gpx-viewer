@@ -17,6 +17,7 @@ export const history = createBrowserHistory()
 
 // Import the styles here to process them with webpack
 import './style.scss';
+import 'leaflet/dist/leaflet.css';
 
 
 store.subscribe(() => {
