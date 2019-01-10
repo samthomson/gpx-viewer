@@ -2,6 +2,9 @@
 	"name": "gpx-viewer",
 	"version": "0.1.0",
 	"main": "main.js",
+	"license": "MIT",
+	"author": "Sam Thomson <samt@samt.st> (https://samt.st)",
+	"repository": "github:samthomson/gpx-viewer",
 	"scripts": {
 		"start": "electron ./dist/main.bundle.js",
 		"dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
