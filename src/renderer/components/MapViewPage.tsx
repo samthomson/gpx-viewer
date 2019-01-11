@@ -43,36 +43,22 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		let bounds = points
 
        return (
-			<div>
-				<h1>{this.props.fileData.name}</h1> 
-
-				<div style={{
-					paddingBottom: "5%",
-					height: "400px",
-					width: "800px"
-				}}>
-					<Map style={{
-						paddingBottom: "5%",
-						height: "400px",
-						width: "800px"}}
-						id="map"
-						bounds={bounds}
-					>
-						<TileLayer
-							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						/>
-						{points.map(function(point, i){
-							return <Marker key={i} position={[point[0], point[1]]}></Marker>
-						})}
-					</Map>
-				</div>
-
-				<p>[map view: render this gpx file - {this.props.fileData.points.length} points of data]</p>
-				<p>[elevation profile]</p>
-				<p>[trackpoint log]</p>
-				<button onClick={this.props.goToStartPage}>home</button>
-			</div> 
+			<div className="map-container">
+				<Map style={{
+					height: "100%",
+					width: "100%"}}
+					id="map"
+					bounds={bounds}
+				>
+					<TileLayer
+						attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					/>
+					{points.map(function(point, i){
+						return <Marker key={i} position={[point[0], point[1]]}></Marker>
+					})}
+				</Map>
+			</div>
        )
     }
 }

@@ -27,8 +27,7 @@ store.dispatch(goToStartPage())
 store.dispatch(loadFile('./Kuwait.gpx')) 
 
 ReactDOM.render(
-    <div>
-        <h4>GPX Viewer</h4>
+    <div style={{backgroundColor:'red'}}>
 		<Provider store={store}>
 			<Router history={history}>
 				<div>
