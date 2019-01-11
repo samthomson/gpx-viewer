@@ -6,6 +6,7 @@ import {  Map, TileLayer, Marker, Popup } from 'react-leaflet'
 // @ts-ignore
 import * as L from 'leaflet'
 import { Store } from '../redux/store'
+import { goToStartPage } from '../redux/actions'
 import { GPXData } from '../../declarations';
 
 import 'leaflet/dist/leaflet.css'
@@ -20,6 +21,7 @@ L.Icon.Default.mergeOptions({
 })
 
 interface IMyComponentProps {
+	goToStartPage: any,
 	fileData: GPXData
 }
 
@@ -69,7 +71,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 				<p>[map view: render this gpx file - {this.props.fileData.points.length} points of data]</p>
 				<p>[elevation profile]</p>
 				<p>[trackpoint log]</p>
-				<Link to="/">home</Link>
+				<button onClick={this.props.goToStartPage}>home</button>
 			</div> 
        )
     }
@@ -81,7 +83,11 @@ const mapStateToProps = (state: Store.App) => {
 	};
 };
 
+const mapDispatchToProps = (dispatch: any) => ({
+	goToStartPage: () => dispatch(goToStartPage())
+})
+
 export default connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(MapViewPage)
