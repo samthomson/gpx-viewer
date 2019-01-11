@@ -28,7 +28,8 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
     render() {
-		const position = [0, 0]
+		const { latitude, longitude } = this.props.fileData.points[0]
+		const position = [latitude, longitude]
 
 
        return (
@@ -44,7 +45,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						paddingBottom: "5%",
 						height: "400px",
 						width: "800px"}}
-						center={position} zoom={3} id="map"
+						center={position} zoom={8} id="map"
 					>
 						<TileLayer
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
