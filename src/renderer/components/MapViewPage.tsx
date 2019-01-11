@@ -50,8 +50,9 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						<Marker position={position}>
-						</Marker>
+						{this.props.fileData.points.map(function(point, i){
+							return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
+						})}
 					</Map>
 				</div>
 
