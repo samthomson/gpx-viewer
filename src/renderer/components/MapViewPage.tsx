@@ -22,7 +22,9 @@ L.Icon.Default.mergeOptions({
 
 interface IMyComponentProps {
 	goToStartPage: any,
-	fileData: GPXData
+	fileData: GPXData,
+	name: string,
+	points: Array<[number, number]>
 }
 
 export class MapViewPage extends React.Component<IMyComponentProps, {}> {
@@ -30,46 +32,61 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
     render() {
-		const { latitude, longitude } = this.props.fileData.points[0]
-		const position = [latitude, longitude]
-
-
-		// create points
-		let points: Array<[number, number]> = []
-
-		this.props.fileData.points.map(oPoint => {
-			points.push([oPoint.latitude, oPoint.longitude]);
-		})
-		let bounds = points
-
-       return (
-			<div className="map-container">
-				<div className="floating-map-button">
-					<a onClick={this.props.goToStartPage}>close {this.props.fileData.name}</a>
+		if (this.props.points.length > 0) {
+			const { name, points } = this.props
+			
+			return (
+				<div className="map-container">
+					<div className="floating-map-button">
+						<a className="ui button basic" onClick={this.props.goToStartPage}>close {name}</a>
+					</div>
+					<Map
+						style={{
+							height: "100%",
+							width: "100%"
+						}}
+						bounds={points}
+					>
+						<TileLayer
+							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						/>
+						{points.map(function(point, i){
+							return <Marker key={i} position={[point[0], point[1]]}></Marker>
+						})}
+					</Map>
 				</div>
-				<Map
-					style={{
-						height: "100%",
-						width: "100%"
-					}}
-					bounds={bounds}
-				>
-					<TileLayer
-						attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-					/>
-					{points.map(function(point, i){
-						return <Marker key={i} position={[point[0], point[1]]}></Marker>
-					})}
-				</Map>
-			</div>
-       )
+			)
+		} else {
+			return (
+				<div>loading..</div>
+			)
+		}
     }
+}
+
+const pointsFromFileData = (data: GPXData) => {
+	let points: Array<[number, number]> = []
+
+	if (data) {
+		if (data.points) {
+			data.points.map(oPoint => {
+				points.push([oPoint.latitude, oPoint.longitude]);
+			})
+		}
+	}
+	return points
+}
+
+const nameFromFileData = (data: GPXData) => {
+	return data && data.name ? data.name : '[error opening map]'
 }
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		fileData: state.fileData
+		fileData: state.fileData,
+		points: pointsFromFileData(state.fileData),
+		name: nameFromFileData(state.fileData)
 	};
 };
 

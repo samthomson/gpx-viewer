@@ -13,8 +13,7 @@ export type Action = {
   
 export const loadFile = (filePath: string): Action => {
 	// load data
-	const sFileData = fs.readFileSync(filePath, 'utf8');
-	 
+	const sFileData = fs.readFileSync(filePath, 'utf8')	 
 	const gpxData: GPXData = parseGPXData(sFileData)
 
 	// change page
