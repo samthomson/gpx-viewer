@@ -1,10 +1,21 @@
+/* semantic */
+@import url('~semantic-ui-css/components/button.css');
+@import url('~semantic-ui-css/components/container.css');
+@import url('~semantic-ui-css/components/segment.css');
+
+
 $iSpacing: 16px;
+
+body { margin:0; padding:0;  }
 
 .app {
 	color: black;
 }
 
-body { margin:0; padding:0;  }
+.home-container {
+	padding-top: 30%;
+}
+
 .map-container{
 	position: absolute; top:0; bottom:0; right:0; left:0;
 }

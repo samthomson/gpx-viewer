@@ -24,7 +24,6 @@ store.subscribe(() => {
 })
 
 store.dispatch(goToStartPage()) 
-store.dispatch(loadFile('./Kuwait.gpx')) 
 
 ReactDOM.render(
     <div>

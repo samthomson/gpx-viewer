@@ -30,10 +30,11 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 	}
     render() {
        return (
-        <div>
-            <h1>Start page</h1>
-            <p>open a GPX file to begin..</p>
-			<button onClick={this.selectFile.bind(this)}>select a GPX file..</button>
+        <div className="ui container home-container">
+			<div className="ui segment">
+            	<p>open a GPX file to begin..</p>
+				<a className="ui button" onClick={this.selectFile.bind(this)}>select a GPX file..</a>
+			</div> 
         </div> 
        )
     }
