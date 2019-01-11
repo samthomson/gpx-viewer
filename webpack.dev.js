@@ -52,7 +52,8 @@ let rendererConfig = {
     output: {
         filename: 'renderer.bundle.js',
         path: __dirname + '/dist',
-    },
+        publicPath: __dirname + '/dist',
+	},
     node: {
         __dirname: false,
         __filename: false,
@@ -74,7 +75,7 @@ let rendererConfig = {
                 test: /\.(scss|css)$/,
                 use: [
                     'style-loader',
-                    'css-loader?sourceMap',
+					'css-loader?sourceMap',
                     'sass-loader?sourceMap',
                 ],
             },
@@ -82,8 +83,8 @@ let rendererConfig = {
                 test: /\.(jpg|png|svg|ico|icns)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[path][name].[ext]',
-                },
+                    name: '/[path][name].[ext]?[hash]',
+				},
             },
             // {
             //     test: /\.(eot|ttf|woff|woff2)$/,
@@ -97,7 +98,7 @@ let rendererConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/renderer/index.html'),
-        }),
+		}),
     ],
 };
 
