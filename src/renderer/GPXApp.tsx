@@ -27,7 +27,7 @@ store.dispatch(goToStartPage())
 store.dispatch(loadFile('./Kuwait.gpx')) 
 
 ReactDOM.render(
-    <div style={{backgroundColor:'red'}}>
+    <div>
 		<Provider store={store}>
 			<Router history={history}>
 				<div>

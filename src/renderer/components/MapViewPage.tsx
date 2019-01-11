@@ -44,10 +44,11 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
        return (
 			<div className="map-container">
-				<Map style={{
-					height: "100%",
-					width: "100%"}}
-					id="map"
+				<Map
+					style={{
+						height: "100%",
+						width: "100%"
+					}}
 					bounds={bounds}
 				>
 					<TileLayer
