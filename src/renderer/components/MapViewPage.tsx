@@ -32,6 +32,15 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		const position = [latitude, longitude]
 
 
+		// create points
+		let points: Array<[number, number]> = []
+
+		this.props.fileData.points.map(oPoint => {
+			// points.push(new L.latLng(oPoint.latitude, oPoint.longitude));
+			points.push([oPoint.latitude, oPoint.longitude]);
+		})
+		let bounds = points
+
        return (
 			<div>
 				<h1>Map view page</h1> 
@@ -45,15 +54,19 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						paddingBottom: "5%",
 						height: "400px",
 						width: "800px"}}
-						center={position} zoom={8} id="map"
+						id="map"
+						bounds={bounds}
 					>
 						<TileLayer
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						{this.props.fileData.points.map(function(point, i){
-							return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
+						{points.map(function(point, i){
+							return <Marker key={i} position={[point[0], point[1]]}></Marker>
 						})}
+						{/* {this.props.fileData.points.map((point, i) => {
+							return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
+						})} */}
 					</Map>
 				</div>
 
