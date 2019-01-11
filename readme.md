@@ -1,6 +1,8 @@
 # GPX viewer
 
-This is a simple app for viewing GPX files. It aims to visualise a file on a map, and with an elevation profile too.
+![Alt text](/screenshot.png?raw=true "GPX Viewer")
+
+This is a simple app for viewing GPX files. It aims to visualise the GPX tracks on a map.
 
 It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javascript is actually Typescript.
 
