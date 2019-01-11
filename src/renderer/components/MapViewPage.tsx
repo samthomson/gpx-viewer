@@ -36,14 +36,13 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		let points: Array<[number, number]> = []
 
 		this.props.fileData.points.map(oPoint => {
-			// points.push(new L.latLng(oPoint.latitude, oPoint.longitude));
 			points.push([oPoint.latitude, oPoint.longitude]);
 		})
 		let bounds = points
 
        return (
 			<div>
-				<h1>Map view page</h1> 
+				<h1>{this.props.fileData.name}</h1> 
 
 				<div style={{
 					paddingBottom: "5%",
@@ -64,9 +63,6 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						{points.map(function(point, i){
 							return <Marker key={i} position={[point[0], point[1]]}></Marker>
 						})}
-						{/* {this.props.fileData.points.map((point, i) => {
-							return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
-						})} */}
 					</Map>
 				</div>
 
