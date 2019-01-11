@@ -44,6 +44,9 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
        return (
 			<div className="map-container">
+				<div className="floating-map-button">
+					<a onClick={this.props.goToStartPage}>close {this.props.fileData.name}</a>
+				</div>
 				<Map
 					style={{
 						height: "100%",

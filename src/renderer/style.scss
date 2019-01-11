@@ -1,3 +1,5 @@
+$iSpacing: 16px;
+
 .app {
 	color: black;
 }
@@ -5,4 +7,13 @@
 body { margin:0; padding:0;  }
 .map-container{
 	position: absolute; top:0; bottom:0; right:0; left:0;
+}
+.floating-map-button {
+	z-index: 1000;
+	padding: $iSpacing;
+	background-color: white;
+	border-radius: $iSpacing;
+	position: absolute;
+	top: $iSpacing;
+	right: $iSpacing;
 }
