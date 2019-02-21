@@ -1,13 +1,15 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store } from '../redux/store'
-import { loadFile } from '../redux/actions'
+import { loadFile, startLoadingFile } from '../redux/actions'
 import { remote } from 'electron'
-import { GPXData } from '../../declarations';
+import { GPXData } from '../../declarations'
 
 interface IMyComponentProps {
+	bFileLoading: boolean
 	loadFile: any,
-	fileData: GPXData
+	fileData: GPXData,
+	startLoadingFile: any
 }
 
 interface IMyComponentState {
@@ -19,6 +21,7 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 	}
 	
 	selectFile = () => {
+		this.props.startLoadingFile()
 		remote.dialog.showOpenDialog({ 
 			filters: [
 				{ name: 'GPX files', extensions: ['gpx'] },
@@ -34,6 +37,7 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 			<div className="ui segment">
             	<p>open a GPX file to begin..</p>
 				<a className="ui button" onClick={this.selectFile.bind(this)}>select a GPX file..</a>
+				file loading: {String(this.props.bFileLoading)}
 			</div> 
         </div> 
        )
@@ -42,11 +46,13 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 
 
 const mapStateToProps = (state: Store.App) => ({
-	fileData: state.fileData
+	fileData: state.fileData,
+	bFileLoading: state.bFileLoading
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-	loadFile: (filePath: string) => dispatch(loadFile(filePath))
+	loadFile: (filePath: string) => dispatch(loadFile(filePath)),
+	startLoadingFile: () => dispatch(startLoadingFile())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartPage)
