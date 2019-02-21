@@ -13,3 +13,14 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 - open two terminals
 	- in one: `yarn dev` this starts a webpack watch task to build all assets.
 	- in the other: `yarn start` this starts the electron app.
+
+
+## notes
+
+- built with
+	- react typescript
+	- electron
+	- webpack
+- making use of
+	- react leaflet https://react-leaflet.js.org/
+	- clustering package https://github.com/YUzhva/react-leaflet-markercluster

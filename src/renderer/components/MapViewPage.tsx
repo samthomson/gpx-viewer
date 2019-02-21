@@ -1,16 +1,18 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 // @ts-ignore
 import {  Map, TileLayer, Marker, Popup } from 'react-leaflet'
 // @ts-ignore
 import * as L from 'leaflet'
+// @ts-ignore
+import MarkerClusterGroup from 'react-leaflet-markercluster'
+
 import { Store } from '../redux/store'
 import { goToStartPage } from '../redux/actions'
 import { GPXData } from '../../declarations';
 
 import 'leaflet/dist/leaflet.css'
-
+import 'react-leaflet-markercluster/dist/styles.min.css'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -46,14 +48,17 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 							width: "100%"
 						}}
 						bounds={points}
+						maxZoom={18}
 					>
 						<TileLayer
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						{points.map(function(point, i){
-							return <Marker key={i} position={[point[0], point[1]]}></Marker>
-						})}
+						<MarkerClusterGroup>
+							{points.map(function(point, i){
+								return <Marker key={i} position={[point[0], point[1]]}></Marker>
+							})}
+						</MarkerClusterGroup>
 					</Map>
 				</div>
 			)
