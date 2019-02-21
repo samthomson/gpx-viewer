@@ -10,6 +10,7 @@ export type Action = {
 	bFileLoading: boolean,
   } | {
 	type: 'START_PAGE',
+	fileData: GPXData,
   } | {
 	type: 'START_LOADING_FILE',
 	bFileLoading: boolean
@@ -39,6 +40,7 @@ export const startLoadingFile = (): Action => {
 export const goToStartPage = (): Action => {
 	history.push('/');
 	return {
+		fileData: null,
 		type: 'START_PAGE',
 	}
 }

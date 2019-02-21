@@ -14,6 +14,7 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 		case 'LOAD_FILE':
 			return {
 				...state,
+				bFileLoading: false,
 				haveAFile: true,
 				fileData: action.fileData
 			}
@@ -26,7 +27,7 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 		case 'START_LOADING_FILE':
 			return {
 				...state,
-				bFileLoading: true
+				bFileLoading: action.bFileLoading
 			}
 	}
 

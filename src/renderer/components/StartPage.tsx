@@ -21,28 +21,28 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 	}
 	
 	selectFile = () => {
-		this.props.startLoadingFile()
 		remote.dialog.showOpenDialog({ 
 			filters: [
 				{ name: 'GPX files', extensions: ['gpx'] },
 			],
 			properties: [ 'openFile' ] }, (filename: string[]) => {
 				if (filename && filename.length === 1) {
+					this.props.startLoadingFile()
 					this.props.loadFile(filename[0])
 				}
 			}
 		)	
 	}
     render() {
-       return (
-        <div className="ui container home-container">
-			<div className="ui segment">
-            	<p>open a GPX file to begin..</p>
-				<a className="ui button" onClick={this.selectFile.bind(this)}>select a GPX file..</a>
-				file loading: {String(this.props.bFileLoading)}
+		return (
+			<div className="ui container home-container">
+				<div className="ui segment">
+					<p>open a GPX file to begin..</p>
+					<a className="ui button" onClick={this.selectFile.bind(this)}>select a GPX file..</a>
+					file loading: {String(this.props.bFileLoading)}
+				</div> 
 			</div> 
-        </div> 
-       )
+		)
     }
 }
 
