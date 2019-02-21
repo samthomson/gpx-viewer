@@ -27,7 +27,9 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 				{ name: 'GPX files', extensions: ['gpx'] },
 			],
 			properties: [ 'openFile' ] }, (filename: string[]) => {
-				this.props.loadFile(filename[0])
+				if (filename && filename.length === 1) {
+					this.props.loadFile(filename[0])
+				}
 			}
 		)	
 	}
