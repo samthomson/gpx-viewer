@@ -6,7 +6,7 @@
 
 $iSpacing: 16px;
 
-$iElevationProfileHeight: 150px;
+$iElevationProfileHeight: 200px;
 $iTimelineSidebarWidth: 200px;
 
 body { margin:0; padding:0;  }
@@ -23,11 +23,13 @@ body { margin:0; padding:0;  }
 .sidebar-container {
 	position: absolute; top:0; bottom:0; left:0;
 	width: 200px;
+	background: green;
 }
 
 .elevation-profile-container {
 	position: absolute; bottom:0; right:0; left:$iTimelineSidebarWidth;
 	height: $iElevationProfileHeight;
+	background: red;
 }
 
 .map-container{

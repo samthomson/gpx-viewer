@@ -12,7 +12,7 @@ import ElevationProfile from './ElevationProfile';
 import TimelineSidebar from './TimelineSidebar';
 
 import { Store } from '../redux/store'
-import { goToStartPage } from '../redux/actions'
+import { goToStartPage, updatePointsInView } from '../redux/actions'
 import { GPXData, GPXPoint } from '../../declarations';
 
 import 'leaflet/dist/leaflet.css'
@@ -31,7 +31,8 @@ interface IMyComponentProps {
 	fileData: GPXData,
 	name: string,
 	rawPoints: Array<[number, number]>
-	points: Array<GPXPoint>
+	points: Array<GPXPoint>,
+	updatePointsInView: any
 }
 
 export class MapViewPage extends React.Component<IMyComponentProps, {}> {
@@ -53,6 +54,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		})
 
 		// fire reducer/action to update points in view
+		this.props.updatePointsInView(aPointsWithinMapBounds)
 	}
     render() {
 		if (this.props.points.length > 0) {
@@ -132,7 +134,8 @@ const mapStateToProps = (state: Store.App) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-	goToStartPage: () => dispatch(goToStartPage())
+	goToStartPage: () => dispatch(goToStartPage()),
+	updatePointsInView: (aPointsInView: Array<GPXPoint>) => dispatch(updatePointsInView(aPointsInView))
 })
 
 export default connect(

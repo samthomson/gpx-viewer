@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { history } from '../GPXApp';
-import { GPXData } from '../../declarations';
+import { GPXData, GPXPoint } from '../../declarations';
 import { parseGPXData } from '../lib/helper';
 
 
@@ -14,6 +14,9 @@ export type Action = {
   } | {
 	type: 'START_LOADING_FILE',
 	bFileLoading: boolean
+  } | {
+	type: 'UPDATE_POINTS_IN_VIEW',
+	aPointsInView: Array<GPXPoint>
   }
   
 export const loadFile = (filePath: string): Action => {
@@ -42,5 +45,12 @@ export const goToStartPage = (): Action => {
 	return {
 		fileData: null,
 		type: 'START_PAGE',
+	}
+}
+
+export const updatePointsInView = (pointsInView: Array<GPXPoint>): Action => {
+	return { 
+		type: 'UPDATE_POINTS_IN_VIEW',
+		aPointsInView: pointsInView
 	}
 }

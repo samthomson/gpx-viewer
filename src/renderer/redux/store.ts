@@ -1,11 +1,12 @@
-import { GPXData } from "../../declarations";
+import { GPXData, GPXPoint } from "../../declarations";
 
 export namespace Store {
 
 	export type App = {
 		haveAFile: boolean
 		fileData: GPXData
-		bFileLoading: boolean
+		bFileLoading: boolean,
+		aPointsInView: Array<GPXPoint>
 	}
   
 	export type All = {

@@ -22,7 +22,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 			)
 		} else {
 			return (
-				<div>loading..</div>
+				<div>no points..</div>
 			)
 		}
     }
@@ -30,7 +30,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		points: state.fileData && state.fileData.points ? state.fileData.points : []
+		points: state.aPointsInView
 	};
 };
 

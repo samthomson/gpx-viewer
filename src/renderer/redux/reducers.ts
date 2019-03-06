@@ -4,7 +4,8 @@ import { Store } from './store'
 const initialState: Store.App = {
 	haveAFile: false,
 	fileData: null,
-	bFileLoading: false
+	bFileLoading: false,
+	aPointsInView: []
 }
 
 export function appReducers (state: Store.App = initialState, action: Action): Store.App {
@@ -28,6 +29,11 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 			return {
 				...state,
 				bFileLoading: action.bFileLoading
+			}
+		case 'UPDATE_POINTS_IN_VIEW':
+			return {
+				...state,
+				aPointsInView: action.aPointsInView
 			}
 	}
 
