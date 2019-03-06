@@ -33,6 +33,25 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
     constructor(props: IMyComponentProps) {
 		super(props);
 	}
+	handleMoveend() {
+		// fires on pan and zoom
+		
+		// @ts-ignore
+		let oBounds = this.refs.map.leafletElement.getBounds()
+
+		let aPointsWithinMapBounds: Array<any> = []
+
+		this.props.points.forEach(oP => {
+			if (oBounds.contains(oP)) {
+				aPointsWithinMapBounds.push(oP)
+			}
+		})
+
+		console.log(`${aPointsWithinMapBounds.length} points in view`)
+		if (aPointsWithinMapBounds.length > 0 ) {
+			console.log('sample point: ', aPointsWithinMapBounds[0])
+		}
+	}
     render() {
 		if (this.props.points.length > 0) {
 			const { name, points } = this.props
@@ -49,6 +68,8 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						}}
 						bounds={points}
 						maxZoom={18}
+						onMoveend={this.handleMoveend.bind(this)}
+						ref="map"
 					>
 						<TileLayer
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
