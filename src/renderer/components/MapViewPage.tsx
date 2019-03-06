@@ -9,7 +9,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster'
 
 import { Store } from '../redux/store'
 import { goToStartPage } from '../redux/actions'
-import { GPXData } from '../../declarations';
+import { GPXData, GPXPoint } from '../../declarations';
 
 import 'leaflet/dist/leaflet.css'
 import 'react-leaflet-markercluster/dist/styles.min.css'
@@ -26,7 +26,8 @@ interface IMyComponentProps {
 	goToStartPage: any,
 	fileData: GPXData,
 	name: string,
-	points: Array<[number, number]>
+	rawPoints: Array<[number, number]>
+	points: Array<GPXPoint>
 }
 
 export class MapViewPage extends React.Component<IMyComponentProps, {}> {
@@ -42,20 +43,17 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		let aPointsWithinMapBounds: Array<any> = []
 
 		this.props.points.forEach(oP => {
-			if (oBounds.contains(oP)) {
+			if (oBounds.contains([oP.latitude, oP.longitude])) {
 				aPointsWithinMapBounds.push(oP)
 			}
 		})
 
-		console.log(`${aPointsWithinMapBounds.length} points in view`)
-		if (aPointsWithinMapBounds.length > 0 ) {
-			console.log('sample point: ', aPointsWithinMapBounds[0])
-		}
+		// fire reducer/action to update points in view
 	}
     render() {
 		if (this.props.points.length > 0) {
-			const { name, points } = this.props
-			
+			const { name, points, rawPoints } = this.props
+
 			return (
 				<div className="map-container">
 					<div className="floating-map-button">
@@ -66,7 +64,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 							height: "100%",
 							width: "100%"
 						}}
-						bounds={points}
+						bounds={rawPoints}
 						maxZoom={18}
 						onMoveend={this.handleMoveend.bind(this)}
 						ref="map"
@@ -77,7 +75,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						/>
 						<MarkerClusterGroup>
 							{points.map(function(point, i){
-								return <Marker key={i} position={[point[0], point[1]]}></Marker>
+								return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
 							})}
 						</MarkerClusterGroup>
 					</Map>
@@ -91,7 +89,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
     }
 }
 
-const pointsFromFileData = (data: GPXData) => {
+const pointsFromFileData = (data: GPXData): Array<[number, number]> => {
 	let points: Array<[number, number]> = []
 
 	if (data) {
@@ -111,7 +109,8 @@ const nameFromFileData = (data: GPXData) => {
 const mapStateToProps = (state: Store.App) => {
 	return {
 		fileData: state.fileData,
-		points: pointsFromFileData(state.fileData),
+		rawPoints: pointsFromFileData(state.fileData),
+		points: state.fileData && state.fileData.points ? state.fileData.points : [],
 		name: nameFromFileData(state.fileData)
 	};
 };
