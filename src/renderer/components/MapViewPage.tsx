@@ -7,6 +7,10 @@ import * as L from 'leaflet'
 // @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 
+
+import ElevationProfile from './ElevationProfile';
+import TimelineSidebar from './TimelineSidebar';
+
 import { Store } from '../redux/store'
 import { goToStartPage } from '../redux/actions'
 import { GPXData, GPXPoint } from '../../declarations';
@@ -55,30 +59,38 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 			const { name, points, rawPoints } = this.props
 
 			return (
-				<div className="map-container">
-					<div className="floating-map-button">
-						<a className="ui button basic" onClick={this.props.goToStartPage}>close {name}</a>
+				<div>
+					<div className="sidebar-container">
+						<TimelineSidebar />
 					</div>
-					<Map
-						style={{
-							height: "100%",
-							width: "100%"
-						}}
-						bounds={rawPoints}
-						maxZoom={18}
-						onMoveend={this.handleMoveend.bind(this)}
-						ref="map"
-					>
-						<TileLayer
-							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						/>
-						<MarkerClusterGroup>
-							{points.map(function(point, i){
-								return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
-							})}
-						</MarkerClusterGroup>
-					</Map>
+					<div className="elevation-profile-container">
+						<ElevationProfile />
+					</div>
+					<div className="map-container">
+						<div className="floating-map-button">
+							<a className="ui button basic" onClick={this.props.goToStartPage}>close {name}</a>
+						</div>
+						<Map
+							style={{
+								height: "100%",
+								width: "100%"
+							}}
+							bounds={rawPoints}
+							maxZoom={18}
+							onMoveend={this.handleMoveend.bind(this)}
+							ref="map"
+						>
+							<TileLayer
+								attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+							/>
+							<MarkerClusterGroup>
+								{points.map(function(point, i){
+									return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
+								})}
+							</MarkerClusterGroup>
+						</Map>
+					</div>
 				</div>
 			)
 		} else {

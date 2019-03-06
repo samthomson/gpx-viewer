@@ -6,6 +6,9 @@
 
 $iSpacing: 16px;
 
+$iElevationProfileHeight: 150px;
+$iTimelineSidebarWidth: 200px;
+
 body { margin:0; padding:0;  }
 
 .app {
@@ -16,8 +19,19 @@ body { margin:0; padding:0;  }
 	padding-top: 30%;
 }
 
+
+.sidebar-container {
+	position: absolute; top:0; bottom:0; left:0;
+	width: 200px;
+}
+
+.elevation-profile-container {
+	position: absolute; bottom:0; right:0; left:$iTimelineSidebarWidth;
+	height: $iElevationProfileHeight;
+}
+
 .map-container{
-	position: absolute; top:0; bottom:0; right:0; left:0;
+	position: absolute; top:0; bottom:$iElevationProfileHeight; right:0; left: $iElevationProfileHeight;
 }
 .floating-map-button {
 	z-index: 1000;
