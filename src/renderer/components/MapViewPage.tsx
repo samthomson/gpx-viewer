@@ -106,11 +106,15 @@ const nameFromFileData = (data: GPXData) => {
 	return data && data.name ? data.name : '[error opening map]'
 }
 
+const rawPointsFromFileData = (data: GPXData) => {
+	return data && data.points ? data.points : []
+}
+
 const mapStateToProps = (state: Store.App) => {
 	return {
 		fileData: state.fileData,
 		rawPoints: pointsFromFileData(state.fileData),
-		points: state.fileData && state.fileData.points ? state.fileData.points : [],
+		points: rawPointsFromFileData(state.fileData),
 		name: nameFromFileData(state.fileData)
 	};
 };
