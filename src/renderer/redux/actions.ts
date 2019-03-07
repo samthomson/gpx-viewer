@@ -6,11 +6,14 @@ import { parseGPXData } from '../lib/helper';
 
 export type Action = {
 	type: 'LOAD_FILE',
-	fileData: GPXData,
+	// fileData: GPXData,
+	filename: string,
+	filepoints: Array<GPXPoint>,
 	bFileLoading: boolean,
   } | {
 	type: 'START_PAGE',
-	fileData: GPXData,
+	filename: string
+	// fileData: GPXData,
   } | {
 	type: 'START_LOADING_FILE',
 	bFileLoading: boolean
@@ -22,13 +25,19 @@ export type Action = {
 export const loadFile = (filePath: string): Action => {
 	// load data
 	const sFileData = fs.readFileSync(filePath, 'utf8')	 
+
+	var t0 = performance.now();
 	const gpxData: GPXData = parseGPXData(sFileData)
+	var t1 = performance.now();
+	console.log("parsing data took " + (t1 - t0) + " milliseconds.")
 
 	// change page
 	history.push('/mapview');
 	return {
 		type: 'LOAD_FILE',
-		fileData: gpxData,
+		// fileData: gpxData,
+		filename: gpxData.name,
+		filepoints: gpxData.points,
 		bFileLoading: false
 	}
 }
@@ -43,7 +52,9 @@ export const startLoadingFile = (): Action => {
 export const goToStartPage = (): Action => {
 	history.push('/');
 	return {
-		fileData: null,
+		// fileData: null,
+		filename: '',
+		// filepoints: [],
 		type: 'START_PAGE',
 	}
 }

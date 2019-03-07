@@ -28,7 +28,8 @@ L.Icon.Default.mergeOptions({
 
 interface IMyComponentProps {
 	goToStartPage: any,
-	fileData: GPXData,
+	// fileData: GPXData,
+	filepoints: Array<GPXPoint>,
 	name: string,
 	rawPoints: Array<[number, number]>
 	points: Array<GPXPoint>,
@@ -47,14 +48,25 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
 		let aPointsWithinMapBounds: Array<any> = []
 
+		var t0 = performance.now();
+
 		this.props.points.forEach(oP => {
 			if (oBounds.contains([oP.latitude, oP.longitude])) {
 				aPointsWithinMapBounds.push(oP)
 			}
 		})
 
+
+		var t1 = performance.now();
+		console.log("Call to filter points took " + (t1 - t0) + " milliseconds.")
+
 		// fire reducer/action to update points in view
+
+		var t2 = performance.now();
 		this.props.updatePointsInView(aPointsWithinMapBounds)
+
+		var t3 = performance.now();
+		console.log("Call to update points took " + (t3 - t2) + " milliseconds.")
 	}
     render() {
 		if (this.props.points.length > 0) {
@@ -103,12 +115,12 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
     }
 }
 
-const pointsFromFileData = (data: GPXData): Array<[number, number]> => {
+const pointsFromState = (state: Store.App): Array<[number, number]> => {
 	let points: Array<[number, number]> = []
 
-	if (data) {
-		if (data.points) {
-			data.points.map(oPoint => {
+	if (state) {
+		if (state.filepoints) {
+			state.filepoints.map(oPoint => {
 				points.push([oPoint.latitude, oPoint.longitude]);
 			})
 		}
@@ -116,20 +128,21 @@ const pointsFromFileData = (data: GPXData): Array<[number, number]> => {
 	return points
 }
 
-const nameFromFileData = (data: GPXData) => {
-	return data && data.name ? data.name : '[error opening map]'
+const nameFromState = (state: Store.App) => {
+	return state && state.filename ? state.filename : '[error opening map]'
 }
 
-const rawPointsFromFileData = (data: GPXData) => {
-	return data && data.points ? data.points : []
+const rawPointsFromState = (data: Store.App) => {
+	return data && data.filepoints ? data.filepoints : []
 }
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		fileData: state.fileData,
-		rawPoints: pointsFromFileData(state.fileData),
-		points: rawPointsFromFileData(state.fileData),
-		name: nameFromFileData(state.fileData)
+		// fileData: state.fileData,
+		filepoints: state.filepoints,
+		rawPoints: pointsFromState(state),
+		points: rawPointsFromState(state),
+		name: nameFromState(state)
 	};
 };
 
