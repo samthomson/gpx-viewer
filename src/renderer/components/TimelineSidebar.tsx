@@ -6,7 +6,7 @@ import { GPXData, GPXPoint } from '../../declarations';
 
 
 interface IMyComponentProps {
-	points: Array<GPXPoint>
+	points: GPXPoint[]
 }
 
 export class TimelineSidebar extends React.Component<IMyComponentProps, {}> {
@@ -28,9 +28,9 @@ export class TimelineSidebar extends React.Component<IMyComponentProps, {}> {
     }
 }
 
-const mapStateToProps = (state: Store.App) => {
+const mapStateToProps = (state: Store.App): IMyComponentProps => {
 	return {
-		points: state.aPointsInView
+		points: []//state.aPointsInView
 	};
 };
 
