@@ -37,40 +37,14 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
     constructor(props: IMyComponentProps) {
 		super(props);
 	}
+
 	handleMoveend() {
-		
-		// fires on pan and zoom
-		
+		// fires on pan and zoom		
 		// @ts-ignore
 		let oBounds = this.refs.map.leafletElement.getBounds()
-		/*
-
-		let aPointsWithinMapBounds: Array<any> = []
-
-		var t0 = performance.now();
-
-		this.props.points.forEach(oP => {
-			if (oBounds.contains([oP.latitude, oP.longitude])) {
-				aPointsWithinMapBounds.push(oP)
-			}
-		})
-
-
-		var t1 = performance.now();
-		console.log("Call to filter points took " + (t1 - t0) + " milliseconds.")
-
-		// fire reducer/action to update points in view
-
-		var t2 = performance.now();
-		// console.log('points in view: ', Object.keys(aPointsWithinMapBounds).length)
-		// console.log(aPointsWithinMapBounds)
-		*/
-		this.props.updatePointsInView(oBounds)
-
-		// var t3 = performance.now();
-		// console.log("Call to update points took " + (t3 - t2) + " milliseconds.")
-		
+		this.props.updatePointsInView(oBounds)		
 	}
+
     render() {
 		if (this.props.aPointsInView.length > 0) {
 			const { name, aPointsInView } = this.props
@@ -87,15 +61,14 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						<div className="floating-map-button">
 							<a className="ui button basic" onClick={this.props.goToStartPage}>close {name}</a>
 						</div>
-
-						<div>{aPointsInView.length} points</div>
 						
 						<Map
 							style={{
 								height: "100%",
 								width: "100%"
 							}}
-							bounds={aPointsInView}
+							center={[aPointsInView[0][0], aPointsInView[0][1]]}
+							zoom={9}
 							maxZoom={18}
 							onMoveend={this.handleMoveend.bind(this)}
 							ref="map"
@@ -134,15 +107,14 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 			})
 
 			const iPointCount: number = aPointsInView.length
-			const iIdealMax: number = 1000
-			console.log('points: ', iPointCount)
+			const iIdealMax: number = 300
 
 			if (iPointCount > iIdealMax) {
 
 				// determine cull ratio
 				let iRatio = Math.floor(iPointCount / iIdealMax)
 
-				// cull down to ~1000 points
+				// cull down to ~300 points
 				points = points.filter((p, i) => { if (i % iRatio === 0) { return p }})
 			}
 		}
@@ -159,7 +131,6 @@ const nameFromState = (state: Store.App) => {
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		// rawPoints: pointsFromState(state),
 		aPointsInView:  pointsFromState(state),
 		name: nameFromState(state)
 	};

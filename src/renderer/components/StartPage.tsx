@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Store } from '../redux/store'
 import { loadFile, startLoadingFile } from '../redux/actions'
 import { remote } from 'electron'
-import { GPXData } from '../../declarations'
 
 interface IMyComponentProps {
 	bFileLoading: boolean
@@ -27,10 +26,7 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 			properties: [ 'openFile' ] }, (filename: string[]) => {
 				if (filename && filename.length === 1) {
 					this.props.startLoadingFile()
-					var t0 = performance.now();
 					this.props.loadFile(filename[0])
-					var t1 = performance.now();
-					console.log("loadfile reducer took " + (t1 - t0) + " milliseconds.")
 				}
 			}
 		)	
