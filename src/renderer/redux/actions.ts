@@ -8,6 +8,7 @@ export type Action = {
 	type: 'LOAD_FILE',
 	filename: string,
 	filepoints: Array<GPXPoint>,
+	aPointsInView: Array<GPXPoint>,
 	bFileLoading: boolean,
   } | {
 	type: 'START_PAGE',
@@ -17,7 +18,7 @@ export type Action = {
 	bFileLoading: boolean
   } | {
 	type: 'UPDATE_POINTS_IN_VIEW',
-	aPointsInView: Array<GPXPoint>
+	oBounds: any
   }
   
 export const loadFile = (filePath: string): Action => {
@@ -35,6 +36,7 @@ export const loadFile = (filePath: string): Action => {
 		type: 'LOAD_FILE',
 		filename: gpxData.name,
 		filepoints: gpxData.points,
+		aPointsInView: gpxData.points,
 		bFileLoading: false
 	}
 }
@@ -55,9 +57,21 @@ export const goToStartPage = (): Action => {
 	}
 }
 
-export const updatePointsInView = (pointsInView: Array<GPXPoint>): Action => {
+// export const updateMapBounds = (oBounds: any): Action => {
+// 	let aPointsWithinMapBounds: Array<any> = []
+
+// 	var t0 = performance.now();
+
+// 	.points.forEach(oP => {
+// 		if (oBounds.contains([oP.latitude, oP.longitude])) {
+// 			aPointsWithinMapBounds.push(oP)
+// 		}
+// 	})
+// }
+
+export const updatePointsInView = (oBounds: any): Action => {
 	return { 
 		type: 'UPDATE_POINTS_IN_VIEW',
-		aPointsInView: pointsInView
+		oBounds: oBounds
 	}
 }

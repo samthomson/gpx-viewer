@@ -28,10 +28,8 @@ L.Icon.Default.mergeOptions({
 
 interface IMyComponentProps {
 	goToStartPage: any,
-	filepoints: GPXPoint[],
 	name: string,
-	rawPoints: [number, number][]
-	points: GPXPoint[],
+	aPointsInView: [number, number][]
 	updatePointsInView: any
 }
 
@@ -40,10 +38,12 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		super(props);
 	}
 	handleMoveend() {
+		
 		// fires on pan and zoom
 		
 		// @ts-ignore
 		let oBounds = this.refs.map.leafletElement.getBounds()
+		/*
 
 		let aPointsWithinMapBounds: Array<any> = []
 
@@ -64,14 +64,16 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		var t2 = performance.now();
 		// console.log('points in view: ', Object.keys(aPointsWithinMapBounds).length)
 		// console.log(aPointsWithinMapBounds)
-		this.props.updatePointsInView(aPointsWithinMapBounds)
+		*/
+		this.props.updatePointsInView(oBounds)
 
-		var t3 = performance.now();
-		console.log("Call to update points took " + (t3 - t2) + " milliseconds.")
+		// var t3 = performance.now();
+		// console.log("Call to update points took " + (t3 - t2) + " milliseconds.")
+		
 	}
     render() {
-		if (this.props.points.length > 0) {
-			const { name, points, rawPoints } = this.props
+		if (this.props.aPointsInView.length > 0) {
+			const { name, aPointsInView } = this.props
 
 			return (
 				<div>
@@ -85,12 +87,15 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 						<div className="floating-map-button">
 							<a className="ui button basic" onClick={this.props.goToStartPage}>close {name}</a>
 						</div>
+
+						<div>{aPointsInView.length} points</div>
+						
 						<Map
 							style={{
 								height: "100%",
 								width: "100%"
 							}}
-							bounds={rawPoints}
+							bounds={aPointsInView}
 							maxZoom={18}
 							onMoveend={this.handleMoveend.bind(this)}
 							ref="map"
@@ -100,8 +105,8 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 							/>
 							<MarkerClusterGroup>
-								{points.map(function(point, i){
-									return <Marker key={i} position={[point.latitude, point.longitude]}></Marker>
+								{aPointsInView.map(function(point, i){
+									return <Marker key={i} position={[point[0], point[1]]}></Marker>
 								})}
 							</MarkerClusterGroup>
 						</Map>
@@ -120,8 +125,8 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 	let points: Array<[number, number]> = []
 
 	if (state) {
-		if (state.filepoints) {
-			state.filepoints.map(oPoint => {
+		if (state.aPointsInView) {
+			state.aPointsInView.map(oPoint => {
 				points.push([oPoint.latitude, oPoint.longitude]);
 			})
 		}
@@ -133,22 +138,17 @@ const nameFromState = (state: Store.App) => {
 	return state && state.filename ? state.filename : '[error opening map]'
 }
 
-const rawPointsFromState = (data: Store.App) => {
-	return data && data.filepoints ? data.filepoints : []
-}
-
 const mapStateToProps = (state: Store.App) => {
 	return {
-		filepoints: state.filepoints,
-		rawPoints: pointsFromState(state),
-		points: rawPointsFromState(state),
+		// rawPoints: pointsFromState(state),
+		aPointsInView:  pointsFromState(state),
 		name: nameFromState(state)
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
 	goToStartPage: () => dispatch(goToStartPage()),
-	updatePointsInView: (aPointsInView: Array<GPXPoint>) => dispatch(updatePointsInView(aPointsInView))
+	updatePointsInView: (oBounds: any) => dispatch(updatePointsInView(oBounds))
 })
 
 export default connect(

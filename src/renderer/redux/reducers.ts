@@ -1,5 +1,6 @@
 import { Action } from './actions'
 import { Store } from './store'
+import { GPXPoint } from '../../declarations';
 
 const initialState: Store.App = {
 	haveAFile: false,
@@ -18,7 +19,8 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 				bFileLoading: false,
 				haveAFile: true,
 				filename: action.filename,
-				filepoints: action.filepoints
+				filepoints: action.filepoints,
+				aPointsInView: action.filepoints
 			}
 		case 'START_PAGE':
 			return {
@@ -32,9 +34,19 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 				bFileLoading: action.bFileLoading
 			}
 		case 'UPDATE_POINTS_IN_VIEW':
+			let oBounds = action.oBounds
+			let aPointsInView: GPXPoint[] = []
+			state.filepoints.forEach(oP => {
+				if (oBounds.contains([oP.latitude, oP.longitude])) {
+					aPointsInView.push(oP)
+				}
+			})
+
+			console.log('bounds: ', oBounds)
+
 			return {
 				...state,
-				aPointsInView: action.aPointsInView
+				aPointsInView: aPointsInView
 			}
 	}
 
