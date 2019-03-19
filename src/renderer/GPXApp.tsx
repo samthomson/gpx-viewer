@@ -24,6 +24,8 @@ store.subscribe(() => {
 })
 
 store.dispatch(goToStartPage()) 
+store.dispatch(loadFile('./Kuwait.gpx')) 
+// store.dispatch(loadFile('./big-file.gpx')) 
 
 ReactDOM.render(
     <div>

@@ -29,10 +29,10 @@ L.Icon.Default.mergeOptions({
 interface IMyComponentProps {
 	goToStartPage: any,
 	// fileData: GPXData,
-	filepoints: Array<GPXPoint>,
+	filepoints: GPXPoint[],
 	name: string,
-	rawPoints: Array<[number, number]>
-	points: Array<GPXPoint>,
+	rawPoints: [number, number][]
+	points: GPXPoint[],
 	updatePointsInView: any
 }
 
@@ -63,6 +63,8 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 		// fire reducer/action to update points in view
 
 		var t2 = performance.now();
+		// console.log('points in view: ', Object.keys(aPointsWithinMapBounds).length)
+		// console.log(aPointsWithinMapBounds)
 		this.props.updatePointsInView(aPointsWithinMapBounds)
 
 		var t3 = performance.now();
@@ -109,7 +111,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 			)
 		} else {
 			return (
-				<div>loading..</div>
+				<div>0 points..</div>
 			)
 		}
     }
