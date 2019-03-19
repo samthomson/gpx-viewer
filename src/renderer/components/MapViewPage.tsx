@@ -124,13 +124,32 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 const pointsFromState = (state: Store.App): Array<[number, number]> => {
 	let points: Array<[number, number]> = []
 
+
 	if (state) {
-		if (state.aPointsInView) {
-			state.aPointsInView.map(oPoint => {
+		let { aPointsInView } = state
+
+		if (aPointsInView) {
+			aPointsInView.map(oPoint => {
 				points.push([oPoint.latitude, oPoint.longitude]);
 			})
+
+			const iPointCount: number = aPointsInView.length
+			const iIdealMax: number = 1000
+			console.log('points: ', iPointCount)
+
+			if (iPointCount > iIdealMax) {
+
+				// determine cull ratio
+				let iRatio = Math.floor(iPointCount / iIdealMax)
+
+				// cull down to ~1000 points
+				points = points.filter((p, i) => { if (i % iRatio === 0) { return p }})
+			}
 		}
 	}
+
+	
+
 	return points
 }
 
