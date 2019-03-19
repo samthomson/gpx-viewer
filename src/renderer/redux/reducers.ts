@@ -42,8 +42,6 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 				}
 			})
 
-			console.log('bounds: ', oBounds)
-
 			return {
 				...state,
 				aPointsInView: aPointsInView

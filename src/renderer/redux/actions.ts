@@ -24,11 +24,7 @@ export type Action = {
 export const loadFile = (filePath: string): Action => {
 	// load data
 	const sFileData = fs.readFileSync(filePath, 'utf8')	 
-
-	var t0 = performance.now();
 	const gpxData: GPXData = parseGPXData(sFileData)
-	var t1 = performance.now();
-	console.log("parsing data took " + (t1 - t0) + " milliseconds.")
 
 	// change page
 	history.push('/mapview');
@@ -52,22 +48,9 @@ export const goToStartPage = (): Action => {
 	history.push('/');
 	return {
 		filename: '',
-		// filepoints: [],
 		type: 'START_PAGE',
 	}
 }
-
-// export const updateMapBounds = (oBounds: any): Action => {
-// 	let aPointsWithinMapBounds: Array<any> = []
-
-// 	var t0 = performance.now();
-
-// 	.points.forEach(oP => {
-// 		if (oBounds.contains([oP.latitude, oP.longitude])) {
-// 			aPointsWithinMapBounds.push(oP)
-// 		}
-// 	})
-// }
 
 export const updatePointsInView = (oBounds: any): Action => {
 	return { 
