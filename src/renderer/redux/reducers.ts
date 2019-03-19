@@ -3,7 +3,6 @@ import { Store } from './store'
 
 const initialState: Store.App = {
 	haveAFile: false,
-	// fileData: null,
 	filename: null,
 	filepoints: [],
 	bFileLoading: false,
@@ -11,7 +10,6 @@ const initialState: Store.App = {
 }
 
 export function appReducers (state: Store.App = initialState, action: Action): Store.App {
-	// const { fileData } = state
 
 	switch (action.type) {
 		case 'LOAD_FILE':
@@ -19,7 +17,6 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 				...state,
 				bFileLoading: false,
 				haveAFile: true,
-				// fileData: action.fileData
 				filename: action.filename,
 				filepoints: action.filepoints
 			}
@@ -27,7 +24,6 @@ export function appReducers (state: Store.App = initialState, action: Action): S
 			return {
 				...state,
 				haveAFile: false,
-				// fileData: fileData
 				filename: action.filename
 			}
 		case 'START_LOADING_FILE':

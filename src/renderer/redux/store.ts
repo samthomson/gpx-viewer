@@ -4,7 +4,6 @@ export namespace Store {
 
 	export type App = {
 		haveAFile: boolean
-		// fileData: GPXData
 		filename: string,
 		filepoints: Array<GPXPoint>,
 		bFileLoading: boolean,

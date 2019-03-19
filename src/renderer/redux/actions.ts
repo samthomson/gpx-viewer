@@ -6,14 +6,12 @@ import { parseGPXData } from '../lib/helper';
 
 export type Action = {
 	type: 'LOAD_FILE',
-	// fileData: GPXData,
 	filename: string,
 	filepoints: Array<GPXPoint>,
 	bFileLoading: boolean,
   } | {
 	type: 'START_PAGE',
 	filename: string
-	// fileData: GPXData,
   } | {
 	type: 'START_LOADING_FILE',
 	bFileLoading: boolean
@@ -35,7 +33,6 @@ export const loadFile = (filePath: string): Action => {
 	history.push('/mapview');
 	return {
 		type: 'LOAD_FILE',
-		// fileData: gpxData,
 		filename: gpxData.name,
 		filepoints: gpxData.points,
 		bFileLoading: false
@@ -52,7 +49,6 @@ export const startLoadingFile = (): Action => {
 export const goToStartPage = (): Action => {
 	history.push('/');
 	return {
-		// fileData: null,
 		filename: '',
 		// filepoints: [],
 		type: 'START_PAGE',

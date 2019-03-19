@@ -8,7 +8,6 @@ import { GPXData } from '../../declarations'
 interface IMyComponentProps {
 	bFileLoading: boolean
 	loadFile: any,
-	fileData: GPXData,
 	startLoadingFile: any
 }
 
@@ -51,7 +50,6 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 
 
 const mapStateToProps = (state: Store.App) => ({
-	fileData: state.fileData,
 	bFileLoading: state.bFileLoading
 })
 

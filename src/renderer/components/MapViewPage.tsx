@@ -28,7 +28,6 @@ L.Icon.Default.mergeOptions({
 
 interface IMyComponentProps {
 	goToStartPage: any,
-	// fileData: GPXData,
 	filepoints: GPXPoint[],
 	name: string,
 	rawPoints: [number, number][]
@@ -140,7 +139,6 @@ const rawPointsFromState = (data: Store.App) => {
 
 const mapStateToProps = (state: Store.App) => {
 	return {
-		// fileData: state.fileData,
 		filepoints: state.filepoints,
 		rawPoints: pointsFromState(state),
 		points: rawPointsFromState(state),
