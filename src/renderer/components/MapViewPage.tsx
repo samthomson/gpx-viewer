@@ -11,6 +11,8 @@ import MarkerClusterGroup from 'react-leaflet-markercluster'
 import ElevationProfile from './ElevationProfile';
 import TimelineSidebar from './TimelineSidebar';
 
+import { proportionPoints } from './../lib/helper'
+
 import { Store } from '../redux/store'
 import { goToStartPage, updatePointsInView } from '../redux/actions'
 import { GPXData, GPXPoint } from '../../declarations';
@@ -109,18 +111,9 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 			const iPointCount: number = aPointsInView.length
 			const iIdealMax: number = 300
 
-			if (iPointCount > iIdealMax) {
-
-				// determine cull ratio
-				let iRatio = Math.floor(iPointCount / iIdealMax)
-
-				// cull down to ~300 points
-				points = points.filter((p, i) => { if (i % iRatio === 0) { return p }})
-			}
+			aPointsInView = proportionPoints(aPointsInView, iIdealMax)
 		}
 	}
-
-	
 
 	return points
 }
