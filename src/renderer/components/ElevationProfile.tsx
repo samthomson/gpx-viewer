@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+// @ts-ignore
+import { Line as LineChart } from  'react-chartjs'
 
 import { Store } from '../redux/store'
 import { GPXData, GPXPoint } from '../../declarations';
@@ -17,8 +19,32 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 		if (this.props.points.length > 0) {
 			const { points } = this.props
 
+			const dataPoints = this.props.points.map(oP => oP.elevation)
+			const dataLabels = this.props.points.map(oP => ''/*oP.time*/)
+
+			let chartOptions = {}
+
+			var chartData = {
+				labels: dataLabels,
+				datasets: [
+					{
+						label: "My First dataset",
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+						data: dataPoints
+					}
+				]
+			};
+
 			return (
-				<div>elevation: {points.length}</div>
+				<div>
+					elevation: {points.length}
+					<LineChart data={chartData} options={chartOptions} width="600" height="250"/>
+				</div>
 			)
 		} else {
 			return (
