@@ -6,6 +6,7 @@ import { Line as LineChart } from  'react-chartjs'
 import { Store } from '../redux/store'
 import { GPXData, GPXPoint } from '../../declarations';
 
+import { proportionPoints } from './../lib/helper'
 
 interface IMyComponentProps {
 	points: Array<GPXPoint>
@@ -42,8 +43,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 
 			return (
 				<div>
-					elevation: {points.length}
-					<LineChart data={chartData} options={chartOptions} width="600" height="250"/>
+					<LineChart data={chartData} options={chartOptions} width="600" height="200"/>
 				</div>
 			)
 		} else {
@@ -56,7 +56,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 
 const mapStateToProps = (state: Store.App): IMyComponentProps => {
 	return {
-		points: state.aPointsInView
+		points: proportionPoints(state.aPointsInView, 100)
 	};
 };
 
