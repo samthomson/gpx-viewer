@@ -48,7 +48,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 	}
 
     render() {
-		if (this.props.aPointsInView.length > 0) {
+		if (this.props.aPointsInView.length > 0 || true) {
 			const { name, aPointsInView } = this.props
 
 			return (
@@ -69,8 +69,9 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 								height: "100%",
 								width: "100%"
 							}}
-							center={[aPointsInView[0][0], aPointsInView[0][1]]}
-							zoom={9}
+							// center={[aPointsInView[0][0], aPointsInView[0][1]]}
+							center={[0,0]}
+							zoom={2}
 							maxZoom={18}
 							onMoveend={this.handleMoveend.bind(this)}
 							ref="map"
@@ -109,9 +110,9 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 			})
 
 			const iPointCount: number = aPointsInView.length
-			const iIdealMax: number = 300
+			const iIdealMax: number = 100
 
-			aPointsInView = proportionPoints(aPointsInView, iIdealMax)
+			points = proportionPoints(points, iIdealMax)
 		}
 	}
 
