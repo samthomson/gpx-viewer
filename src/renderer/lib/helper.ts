@@ -58,3 +58,18 @@ export const parseGPXData = (sFileData: string): GPXData => {
 		points
 	}
 }	
+
+export const proportionPoints = (aPoints: any[], iIdealMax: number): any[] => {
+	const cPointCount: number = aPoints.length
+
+	if (cPointCount > iIdealMax) {
+
+		// determine cull ratio
+		let iRatio = Math.floor(cPointCount / iIdealMax)
+
+		// cull down to ~300 points
+		aPoints = aPoints.filter((p, i) => { if (i % iRatio === 0) { return p }})
+	}
+
+	return aPoints
+}
