@@ -23,13 +23,16 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 			const dataPoints = this.props.points.map(oP => oP.elevation)
 			const dataLabels = this.props.points.map(oP => ''/*oP.time*/)
 
-			let chartOptions = {}
+			let chartOptions = {
+				responsive: true,
+				maintainAspectRatio: false,
+			}
 
 			var chartData = {
 				labels: dataLabels,
 				datasets: [
 					{
-						label: "My First dataset",
+						label: "Elevation of points on the map",
 						fillColor: "rgba(220,220,220,0.2)",
 						strokeColor: "rgba(220,220,220,1)",
 						pointColor: "rgba(220,220,220,1)",
@@ -43,7 +46,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 
 			return (
 				<div>
-					<LineChart data={chartData} options={chartOptions} width="600" height="200"/>
+					<LineChart data={chartData} options={chartOptions} width="100%" height="180"/>
 				</div>
 			)
 		} else {
