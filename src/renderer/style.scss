@@ -7,7 +7,7 @@
 $iSpacing: 16px;
 
 $iElevationProfileHeight: 200px;
-$iTimelineSidebarWidth: 200px;
+$iTimelineSidebarWidth: 0px;
 
 body { margin:0; padding:0;  }
 
@@ -22,7 +22,7 @@ body { margin:0; padding:0;  }
 
 .sidebar-container {
 	position: absolute; top:0; bottom:0; left:0;
-	width: 200px;
+	width: $iTimelineSidebarWidth;
 	background: green;
 }
 
@@ -33,7 +33,7 @@ body { margin:0; padding:0;  }
 }
 
 .map-container{
-	position: absolute; top:0; bottom:$iElevationProfileHeight; right:0; left: $iElevationProfileHeight;
+	position: absolute; top:0; bottom:$iElevationProfileHeight; right:0; left: $iTimelineSidebarWidth;
 }
 .floating-map-button {
 	z-index: 1000;
