@@ -110,7 +110,7 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 			})
 
 			const iPointCount: number = aPointsInView.length
-			const iIdealMax: number = 100
+			const iIdealMax: number = 300
 
 			points = proportionPoints(points, iIdealMax)
 		}
