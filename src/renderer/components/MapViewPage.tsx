@@ -93,13 +93,13 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
 								const markerHtmlStyles = `
 									background-color: ${myCustomColour};
-									width: 3rem;
-									height: 3rem;
+									width: 1rem;
+									height: 1rem;
 									display: block;
-									left: -1.5rem;
-									top: -1.5rem;
+									left: -.5rem;
+									top: -.5rem;
 									position: relative;
-									border-radius: 3rem 3rem 0;
+									border-radius: 1rem 1rem 0;
 									transform: rotate(45deg);
 									border: 1px solid #FFFFFF`
 
