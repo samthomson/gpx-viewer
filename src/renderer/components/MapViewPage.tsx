@@ -7,6 +7,8 @@ import * as L from 'leaflet'
 // @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 
+// @ts-ignore
+import * as Rainbow from 'rainbowvis.js'
 
 import ElevationProfile from './ElevationProfile';
 import TimelineSidebar from './TimelineSidebar';
@@ -48,8 +50,14 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 	}
 
     render() {
+
 		if (this.props.aPointsInView.length > 0 || true) {
 			const { name, aPointsInView } = this.props
+
+
+			var rainbow = new Rainbow(); 
+			rainbow.setNumberRange(1, aPointsInView.length);
+			rainbow.setSpectrum('yellow', 'red');
 
 			return (
 				<div>
@@ -81,7 +89,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 							/>
 							{aPointsInView.map(function(point, i) {
 
-								const myCustomColour = '#FF0000'
+								const myCustomColour = '#' + rainbow.colourAt(i)
 
 								const markerHtmlStyles = `
 									background-color: ${myCustomColour};
