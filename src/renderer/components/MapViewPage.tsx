@@ -82,7 +82,34 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 							/>
 							<MarkerClusterGroup>
 								{aPointsInView.map(function(point, i){
-									return <Marker key={i} position={[point[0], point[1]]}></Marker>
+
+									const myCustomColour = '#FF0000'
+
+									const markerHtmlStyles = `
+										background-color: ${myCustomColour};
+										width: 3rem;
+										height: 3rem;
+										display: block;
+										left: -1.5rem;
+										top: -1.5rem;
+										position: relative;
+										border-radius: 3rem 3rem 0;
+										transform: rotate(45deg);
+										border: 1px solid #FFFFFF`
+
+									var myIcon = L.divIcon({
+										className: "my-custom-pin",
+										iconAnchor: [0, 24],
+										labelAnchor: [-6, 0],
+										popupAnchor: [0, -36],
+										html: `<span style="${markerHtmlStyles}" />`
+									  })
+
+									return <Marker
+										icon={myIcon}
+										key={i}
+										position={[point[0], point[1]]}
+									></Marker>
 								})}
 							</MarkerClusterGroup>
 						</Map>
