@@ -40,17 +40,6 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 						pointHighlightFill: "#fff",
 						pointHighlightStroke: "rgba(220,220,220,1)",
 						data: dataPoints,
-						// fill: {
-						// 	type: 'gradient',
-						// 	gradient: {
-						// 		shade: 'light',
-						// 		type: 'horizontal',
-						// 		shadeIntensity: 1,
-						// 		opacityFrom: 1,
-						// 		opacityTo: 0
-						// 	}
-						// }
-						  
 					}
 				]
 			};

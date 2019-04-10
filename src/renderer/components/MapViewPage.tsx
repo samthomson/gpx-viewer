@@ -57,7 +57,7 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 
 			var rainbow = new Rainbow(); 
 			rainbow.setNumberRange(1, aPointsInView.length);
-			rainbow.setSpectrum('yellow', 'red');
+			rainbow.setSpectrum('#f1c40f', '#e74c3c');
 
 			return (
 				<div>
