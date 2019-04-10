@@ -7,6 +7,8 @@ import * as L from 'leaflet'
 // @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 
+// @ts-ignore
+import * as Rainbow from 'rainbowvis.js'
 
 import ElevationProfile from './ElevationProfile';
 import TimelineSidebar from './TimelineSidebar';
@@ -48,8 +50,14 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 	}
 
     render() {
+
 		if (this.props.aPointsInView.length > 0 || true) {
 			const { name, aPointsInView } = this.props
+
+
+			var rainbow = new Rainbow(); 
+			rainbow.setNumberRange(1, aPointsInView.length);
+			rainbow.setSpectrum('#f1c40f', '#e74c3c');
 
 			return (
 				<div>
@@ -69,7 +77,6 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 								height: "100%",
 								width: "100%"
 							}}
-							// center={[aPointsInView[0][0], aPointsInView[0][1]]}
 							center={[0,0]}
 							zoom={2}
 							maxZoom={18}
@@ -80,11 +87,36 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 								attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 							/>
-							<MarkerClusterGroup>
-								{aPointsInView.map(function(point, i){
-									return <Marker key={i} position={[point[0], point[1]]}></Marker>
-								})}
-							</MarkerClusterGroup>
+							{aPointsInView.map(function(point, i) {
+
+								const myCustomColour = '#' + rainbow.colourAt(i)
+
+								const markerHtmlStyles = `
+									background-color: ${myCustomColour};
+									width: 1rem;
+									height: 1rem;
+									display: block;
+									left: -.5rem;
+									top: -.5rem;
+									position: relative;
+									border-radius: 1rem 1rem 0;
+									transform: rotate(45deg);
+									border: 1px solid #FFFFFF`
+
+								var myIcon = L.divIcon({
+									className: "my-custom-pin",
+									iconAnchor: [0, 24],
+									labelAnchor: [-6, 0],
+									popupAnchor: [0, -36],
+									html: `<span style="${markerHtmlStyles}" />`
+								})
+
+								return <Marker
+									icon={myIcon}
+									key={i}
+									position={[point[0], point[1]]}
+								></Marker>
+							})}
 						</Map>
 					</div>
 				</div>

@@ -25,7 +25,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 
 			let chartOptions = {
 				responsive: true,
-				maintainAspectRatio: false,
+				maintainAspectRatio: false
 			}
 
 			var chartData = {
@@ -39,7 +39,7 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 						pointStrokeColor: "#fff",
 						pointHighlightFill: "#fff",
 						pointHighlightStroke: "rgba(220,220,220,1)",
-						data: dataPoints
+						data: dataPoints,
 					}
 				]
 			};

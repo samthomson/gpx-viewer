@@ -24,3 +24,4 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 - making use of
 	- react leaflet https://react-leaflet.js.org/
 	- clustering package https://github.com/YUzhva/react-leaflet-markercluster
+	- chart https://github.com/reactjs/react-chartjs
