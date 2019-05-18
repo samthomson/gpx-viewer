@@ -12,7 +12,7 @@ function* readFile(action: Action) {
 		const sFileData = fs.readFileSync(action.filename, 'utf8')
 		const gpxData: GPXData = parseGPXData(sFileData)
 
-		yield new Promise(r => setTimeout(r, 5000))
+		// yield new Promise(r => setTimeout(r, 5000))
 
 		yield put(readingFileSucceded(gpxData))
 	} catch (e) {
