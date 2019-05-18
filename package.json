@@ -20,7 +20,8 @@
 	"scripts": {
 		"start": "electron ./dist/main.bundle.js",
 		"dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
-		"lint": "prettier --config=\".prettierrc\" --write src/**/*.ts src/**/*.tsx test/**/*.spec.ts",
+		"lint": "prettier --config=\".prettierrc\" --write \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.spec.ts\"",
+		"check": "prettier --config=\".prettierrc\" --check \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.spec.ts\"",
 		"test": "mocha -r ts-node/register test/**/*.spec.ts"
 	},
 	"devDependencies": {
