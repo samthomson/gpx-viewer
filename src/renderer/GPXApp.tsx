@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { Router } from 'react-router'
 import { Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import StartPage from './components/StartPage';
-import MapViewPage from './components/MapViewPage';
+import StartPage from './components/StartPage'
+import MapViewPage from './components/MapViewPage'
 
 import { createStore, Store as ReduxStore } from 'redux'
 import { appReducers } from './redux/reducers'
@@ -16,22 +16,22 @@ import createBrowserHistory from 'history/createBrowserHistory'
 export const history = createBrowserHistory()
 
 // Import the styles here to process them with webpack
-import './style.scss';
+import './style.scss'
 
-store.dispatch(goToStartPage()) 
-// store.dispatch(loadFile('./Kuwait.gpx')) 
-// store.dispatch(loadFile('./big-file.gpx')) 
+store.dispatch(goToStartPage())
+// store.dispatch(loadFile('./Kuwait.gpx'))
+// store.dispatch(loadFile('./big-file.gpx'))
 
 ReactDOM.render(
-    <div>
+	<div>
 		<Provider store={store}>
 			<Router history={history}>
 				<div>
-					<Route path="/" exact component={ StartPage } />
-					<Route path="/mapview" component={ MapViewPage } />
+					<Route path="/" exact component={StartPage} />
+					<Route path="/mapview" component={MapViewPage} />
 				</div>
 			</Router>
 		</Provider>
-    </div>,
-    document.getElementById('app')
-);
+	</div>,
+	document.getElementById('app'),
+)
