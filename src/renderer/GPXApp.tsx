@@ -12,14 +12,14 @@ import { goToStartPage, loadFile } from './redux/actions'
 import { Store } from './redux/store'
 
 const store: ReduxStore<Store.All> = createStore(appReducers)
-import createBrowserHistory from 'history/createBrowserHistory'
+import {createBrowserHistory} from 'history'
 export const history = createBrowserHistory()
 
 // Import the styles here to process them with webpack
 import './style.scss'
 
 store.dispatch(goToStartPage())
-// store.dispatch(loadFile('./Kuwait.gpx'))
+store.dispatch(loadFile('./Kuwait.gpx'))
 // store.dispatch(loadFile('./big-file.gpx'))
 
 ReactDOM.render(
