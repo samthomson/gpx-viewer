@@ -15,6 +15,7 @@ export type Action =
 	| {
 			type: ActionType.LOADING_FILE_SUCCEEDED
 			filepoints: Array<GPXPoint>
+			filename: string
 			aPointsInView: Array<GPXPoint>
 			bFileLoading: boolean
 	  }
@@ -83,6 +84,7 @@ export const readingFileSucceded = (gpxData: GPXData) => {
 		type: ActionType.LOADING_FILE_SUCCEEDED,
 		filepoints: gpxData.points,
 		aPointsInView: gpxData.points,
+		filename: gpxData.name,
 		bFileLoading: false,
 	}
 }

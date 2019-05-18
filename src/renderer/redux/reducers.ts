@@ -20,6 +20,7 @@ export function appReducers(
 				...state,
 				bFileLoading: false,
 				haveAFile: true,
+				filename: action.filename,
 				filepoints: action.filepoints,
 				aPointsInView: action.filepoints,
 			}
