@@ -21,7 +21,7 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 
 - loading
 - actions as enums
-- prettier spec
 - selector functions
 - consistent notation
 - lint against unused
+- dep vs dev deps are correct

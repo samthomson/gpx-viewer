@@ -20,6 +20,7 @@
 	"scripts": {
 		"start": "electron ./dist/main.bundle.js",
 		"dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
+		"lint": "prettier --config=\".prettierrc\" src/**/*.ts src/**/*.tsx test/**/*.spec.ts --write",
 		"test": "mocha -r ts-node/register test/**/*.spec.ts"
 	},
 	"devDependencies": {
@@ -44,6 +45,7 @@
 		"leaflet.markercluster": "^1.4.1",
 		"mocha": "^5.2.0",
 		"node-sass": "^4.11.0",
+		"prettier": "^1.17.1",
 		"prop-types": "^15.7.2",
 		"rainbowvis.js": "^1.0.1",
 		"react": "^16.7.0",
