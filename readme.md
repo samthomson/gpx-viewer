@@ -21,8 +21,9 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 
 - loading
 - selector functions
+- rename loading file to finished loading file
 - consistent notation
+
+- split routing out from reducer, have its own
 - lint against unused
 - test when loading a file that the elevation profile gets populated
-- rename loading file to finished loading file
-- split routing out from reducer, have its own
