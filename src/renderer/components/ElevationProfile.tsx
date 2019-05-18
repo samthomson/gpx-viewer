@@ -19,9 +19,8 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 	render() {
 		const { points } = this.props
 		if (points && points.length > 0) {
-
-			const dataPoints = points.map(oP => oP.elevation)
-			const dataLabels = points.map(oP => '' /*oP.time*/)
+			const dataPoints = points.map(oP => oP.elevation.toFixed(0))
+			const dataLabels = points.map(() => '')
 
 			let chartOptions = {
 				responsive: true,
