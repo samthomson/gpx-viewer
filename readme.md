@@ -20,8 +20,6 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 ## todo
 
 - loading
-- actions as enums
 - selector functions
 - consistent notation
 - lint against unused
-- dep vs dev deps are correct
