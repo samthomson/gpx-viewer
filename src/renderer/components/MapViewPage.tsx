@@ -50,50 +50,49 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 	}
 
 	render() {
-		if (this.props.aPointsInView.length > 0 || true) {
-			const { name, aPointsInView } = this.props
+		const { name, aPointsInView, goToStartPage } = this.props
 
-			var rainbow = new Rainbow()
+		var rainbow = new Rainbow()
+
+		if (aPointsInView.length > 0) {
 			rainbow.setNumberRange(1, aPointsInView.length)
 			rainbow.setSpectrum('#f1c40f', '#e74c3c')
+		}
 
-			return (
-				<div>
-					<div className="sidebar-container">
-						<TimelineSidebar />
+		return (
+			<div>
+				<div className="sidebar-container">
+					<TimelineSidebar />
+				</div>
+				<div className="elevation-profile-container">
+					<ElevationProfile />
+				</div>
+				<div className="map-container">
+					<div className="floating-map-button">
+						<a className="ui button basic" onClick={goToStartPage}>
+							close {name}
+						</a>
 					</div>
-					<div className="elevation-profile-container">
-						<ElevationProfile />
-					</div>
-					<div className="map-container">
-						<div className="floating-map-button">
-							<a
-								className="ui button basic"
-								onClick={this.props.goToStartPage}
-							>
-								close {name}
-							</a>
-						</div>
 
-						<Map
-							style={{
-								height: '100%',
-								width: '100%',
-							}}
-							center={[0, 0]}
-							zoom={2}
-							maxZoom={18}
-							onMoveend={this.handleMoveend.bind(this)}
-							ref="map"
-						>
-							<TileLayer
-								attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-							/>
-							{aPointsInView.map(function(point, i) {
-								const myCustomColour = '#' + rainbow.colourAt(i)
+					<Map
+						style={{
+							height: '100%',
+							width: '100%',
+						}}
+						center={[0, 0]}
+						zoom={2}
+						maxZoom={18}
+						onMoveend={this.handleMoveend.bind(this)}
+						ref="map"
+					>
+						<TileLayer
+							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						/>
+						{aPointsInView.map(function(point, i) {
+							const myCustomColour = '#' + rainbow.colourAt(i)
 
-								const markerHtmlStyles = `
+							const markerHtmlStyles = `
 									background-color: ${myCustomColour};
 									width: 1rem;
 									height: 1rem;
@@ -105,29 +104,26 @@ export class MapViewPage extends React.Component<IMyComponentProps, {}> {
 									transform: rotate(45deg);
 									border: 1px solid #FFFFFF`
 
-								var myIcon = L.divIcon({
-									className: 'my-custom-pin',
-									iconAnchor: [0, 24],
-									labelAnchor: [-6, 0],
-									popupAnchor: [0, -36],
-									html: `<span style="${markerHtmlStyles}" />`,
-								})
+							var myIcon = L.divIcon({
+								className: 'my-custom-pin',
+								iconAnchor: [0, 24],
+								labelAnchor: [-6, 0],
+								popupAnchor: [0, -36],
+								html: `<span style="${markerHtmlStyles}" />`,
+							})
 
-								return (
-									<Marker
-										icon={myIcon}
-										key={i}
-										position={[point[0], point[1]]}
-									/>
-								)
-							})}
-						</Map>
-					</div>
+							return (
+								<Marker
+									icon={myIcon}
+									key={i}
+									position={[point[0], point[1]]}
+								/>
+							)
+						})}
+					</Map>
 				</div>
-			)
-		} else {
-			return <div>0 points..</div>
-		}
+			</div>
+		)
 	}
 }
 
@@ -142,7 +138,6 @@ const pointsFromState = (state: Store.App): Array<[number, number]> => {
 				points.push([oPoint.latitude, oPoint.longitude])
 			})
 
-			const iPointCount: number = aPointsInView.length
 			const iIdealMax: number = 300
 
 			points = proportionPoints(points, iIdealMax)
