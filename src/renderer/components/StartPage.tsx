@@ -32,14 +32,18 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 		return (
 			<div className="ui container home-container">
 				<div className="ui segment">
-					<p>open a GPX file to begin..</p>
-					<a
-						className="ui button"
-						onClick={this.selectFile.bind(this)}
-					>
-						select a GPX file..
-					</a>
-					file loading: {String(this.props.bFileLoading)}
+					{!this.props.bFileLoading && (
+						<div>
+							<p>open a GPX file to begin..</p>
+							<a
+								className="ui button"
+								onClick={this.selectFile.bind(this)}
+							>
+								select a GPX file..
+							</a>
+						</div>
+					)}
+					{this.props.bFileLoading && <span>file loading..</span>}
 				</div>
 			</div>
 		)
