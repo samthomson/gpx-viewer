@@ -10,4 +10,4 @@ interface GPXPoint {
 	elevation?: number,
 }
 
-export { GPXData, GPXPoint }
+export { GPXData, GPXPoint };

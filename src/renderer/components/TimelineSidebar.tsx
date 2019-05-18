@@ -2,40 +2,34 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { Store } from '../redux/store'
-import { GPXData, GPXPoint } from '../../declarations';
-
+import { GPXData, GPXPoint } from '../../declarations'
 
 interface IMyComponentProps {
 	points: GPXPoint[]
 }
 
 export class TimelineSidebar extends React.Component<IMyComponentProps, {}> {
-    constructor(props: IMyComponentProps) {
-		super(props);
+	constructor(props: IMyComponentProps) {
+		super(props)
 	}
-    render() {
+	render() {
 		if (this.props.points.length > 0) {
 			const { points } = this.props
 
-			return (
-				<div>timeline{points.length}</div>
-			)
+			return <div>timeline{points.length}</div>
 		} else {
-			return (
-				<div>no points yet..</div>
-			)
+			return <div>no points yet..</div>
 		}
-    }
+	}
 }
 
 const mapStateToProps = (state: Store.App): IMyComponentProps => {
 	return {
-		points: state.aPointsInView
-	};
-};
-
+		points: state.aPointsInView,
+	}
+}
 
 export default connect(
 	mapStateToProps,
-	null
+	null,
 )(TimelineSidebar)
