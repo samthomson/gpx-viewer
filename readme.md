@@ -23,3 +23,6 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 - selector functions
 - consistent notation
 - lint against unused
+- test when loading a file that the elevation profile gets populated
+- rename loading file to finished loading file
+- split routing out from reducer, have its own
