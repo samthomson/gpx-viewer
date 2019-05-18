@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store } from '../redux/store'
-import { loadFile, startLoadingFile } from '../redux/actions'
+import { setFileLoading, startLoadingFile } from '../redux/actions'
 import { remote } from 'electron'
 
 interface IMyComponentProps {
 	bFileLoading: boolean
 	loadFile: any
-	startLoadingFile: any
+	startLoadingFile: (sFilePath: string) => {}
+	setFileLoading: (bFileLoading: boolean) => {}
 }
 
 interface IMyComponentState {}
@@ -16,19 +17,16 @@ class StartPage extends React.Component<IMyComponentProps, {}> {
 		super(props)
 	}
 
-	selectFile = () => {
-		remote.dialog.showOpenDialog(
-			{
-				filters: [{ name: 'GPX files', extensions: ['gpx'] }],
-				properties: ['openFile'],
-			},
-			(filename: string[]) => {
-				if (filename && filename.length === 1) {
-					this.props.startLoadingFile()
-					this.props.loadFile(filename[0])
-				}
-			},
-		)
+	selectFile = async () => {
+		const filename = await remote.dialog.showOpenDialog({
+			filters: [{ name: 'GPX files', extensions: ['gpx'] }],
+			properties: ['openFile'],
+		})
+
+		if (filename && filename.length === 1) {
+			this.props.setFileLoading(true)
+			this.props.startLoadingFile(filename[0])
+		}
 	}
 	render() {
 		return (
@@ -53,8 +51,10 @@ const mapStateToProps = (state: Store.App) => ({
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-	loadFile: (filePath: string) => dispatch(loadFile(filePath)),
-	startLoadingFile: () => dispatch(startLoadingFile()),
+	startLoadingFile: (filePath: string) =>
+		dispatch(startLoadingFile(filePath)),
+	setFileLoading: (bFileLoading: boolean) =>
+		dispatch(setFileLoading(bFileLoading)),
 })
 
 export default connect(

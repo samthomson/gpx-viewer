@@ -19,11 +19,11 @@ It's built using Electron and ReactJS, and also uses Webpack and Sass. The Javas
 
 ## todo
 
-- loading
 - selector functions
 - rename loading file to finished loading file
 - consistent notation
 
+- set start loading and actual load operation into one operation?
 - split routing out from reducer, have its own
 - lint against unused
 - test when loading a file that the elevation profile gets populated

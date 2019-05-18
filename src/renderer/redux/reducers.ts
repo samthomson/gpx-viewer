@@ -15,14 +15,19 @@ export function appReducers(
 	action: Action,
 ): Store.App {
 	switch (action.type) {
-		case ActionType.LOAD_FILE:
+		case ActionType.LOADING_FILE_SUCCEEDED:
 			return {
 				...state,
 				bFileLoading: false,
 				haveAFile: true,
-				filename: action.filename,
 				filepoints: action.filepoints,
 				aPointsInView: action.filepoints,
+			}
+		case ActionType.SET_FILE_LOADING_STATUS:
+		case ActionType.LOADING_FILE_FAILED:
+			return {
+				...state,
+				bFileLoading: action.bFileLoading,
 			}
 		case ActionType.START_PAGE:
 			const { filename } = action
