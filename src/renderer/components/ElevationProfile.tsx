@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Line as LineChart } from 'react-chartjs'
 
 import { Store } from '../redux/store'
-import { GPXData, GPXPoint } from '../../declarations'
+import { GPXPoint } from '../../declarations'
 
 import { proportionPoints } from './../lib/helper'
 
@@ -17,11 +17,11 @@ export class ElevationProfile extends React.Component<IMyComponentProps, {}> {
 		super(props)
 	}
 	render() {
-		if (this.props.points.length > 0) {
-			const { points } = this.props
+		const { points } = this.props
+		if (points && points.length > 0) {
 
-			const dataPoints = this.props.points.map(oP => oP.elevation)
-			const dataLabels = this.props.points.map(oP => '' /*oP.time*/)
+			const dataPoints = points.map(oP => oP.elevation)
+			const dataLabels = points.map(oP => '' /*oP.time*/)
 
 			let chartOptions = {
 				responsive: true,

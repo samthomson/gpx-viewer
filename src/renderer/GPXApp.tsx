@@ -19,7 +19,7 @@ export const history = createBrowserHistory()
 import './style.scss'
 
 store.dispatch(goToStartPage())
-store.dispatch(loadFile('./Kuwait.gpx'))
+// store.dispatch(loadFile('./Kuwait.gpx'))
 // store.dispatch(loadFile('./big-file.gpx'))
 
 ReactDOM.render(
