@@ -25,15 +25,17 @@ export function appReducers(
 				aPointsInView: action.filepoints,
 			}
 		case ActionType.START_PAGE:
+			const { filename } = action
 			return {
 				...state,
 				haveAFile: false,
-				filename: action.filename,
+				filename,
 			}
 		case ActionType.START_LOADING_FILE:
+			const { bFileLoading } = action
 			return {
 				...state,
-				bFileLoading: action.bFileLoading,
+				bFileLoading,
 			}
 		case ActionType.UPDATE_POINTS_IN_VIEW:
 			let oBounds = action.oBounds
@@ -46,7 +48,7 @@ export function appReducers(
 
 			return {
 				...state,
-				aPointsInView: aPointsInView,
+				aPointsInView,
 			}
 	}
 
