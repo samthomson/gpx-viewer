@@ -23,7 +23,7 @@
 		"test": "mocha -r ts-node/register test/**/*.spec.ts"
 	},
 	"devDependencies": {
-		"electron": "^4.0.1",
+		"electron": "^7.2.4",
 		"ts-loader": "^5.3.3",
 		"typescript": "^3.2.2",
 		"webpack-cli": "^3.2.1"
