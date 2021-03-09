@@ -43,7 +43,7 @@
 		"leaflet": "^1.4.0",
 		"leaflet.markercluster": "^1.4.1",
 		"mocha": "^5.2.0",
-		"node-sass": "^4.11.0",
+		"node-sass": "^4.13.1",
 		"prop-types": "^15.7.2",
 		"rainbowvis.js": "^1.0.1",
 		"react": "^16.7.0",
